@@ -1,5 +1,7 @@
 package com.ceiba.adn.estacionamiento.domain.services;
 
+import java.util.Calendar;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,11 +25,13 @@ public class ParkingService {
 	}
 	
 	public TicketDomain registerIncome(TicketApplication ticket) {
-		System.out.print("ok ticket:"+ticket);
 		TicketDomain domain = new TicketDomain();
 		domain.setLicensePlate(ticket.getLicensePlate());
+		domain.setDisplacement(Integer.parseInt(ticket.getDisplacement()));
+		domain.setTypeVehicle(ticket.getTypeVehicle());
+		domain.setEntry(Calendar.getInstance().getTime());
+		domain.setStatus(true);
 		//aca van las primeras validaciones
-		System.out.print("ok domain:"+domain);
 		return parking.registerIncome(domain);
 	}
 
