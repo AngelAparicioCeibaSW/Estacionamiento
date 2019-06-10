@@ -4,7 +4,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
 
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import com.ceiba.adn.estacionamiento.domain.core.Parking;
