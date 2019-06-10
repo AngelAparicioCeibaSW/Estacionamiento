@@ -1,6 +1,4 @@
 package com.ceiba.adn.estacionamiento.domain.repository;
-
-import com.ceiba.adn.estacionamiento.application.domain.TicketApplication;
 import com.ceiba.adn.estacionamiento.domain.core.TicketDomain;
 
 public interface ParkingRepository {

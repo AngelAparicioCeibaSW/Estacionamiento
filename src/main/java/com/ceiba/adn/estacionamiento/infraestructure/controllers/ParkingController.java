@@ -1,5 +1,6 @@
 package com.ceiba.adn.estacionamiento.infraestructure.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 import com.ceiba.adn.estacionamiento.application.domain.*;
+import com.ceiba.adn.estacionamiento.domain.core.TicketDomain;
 import com.ceiba.adn.estacionamiento.domain.services.ParkingService;
 
 
@@ -23,6 +25,7 @@ import com.ceiba.adn.estacionamiento.domain.services.ParkingService;
 @Api(tags = "ticket")
 public class ParkingController {
 	
+	@Autowired
 	private ParkingService service;
 
 	public ParkingService getService() {
@@ -33,9 +36,9 @@ public class ParkingController {
 	@ApiOperation(value = "Registrar ticket", notes = "Registra un nuevo ticket")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Ticket registrado correctamente"),
 			@ApiResponse(code = 404, message = "no fue posible registrar el ticket") })
-	public ResponseEntity<TicketApplication> post(@RequestBody TicketApplication ticket) {
-		service.registerIncome(ticket);
-		return new ResponseEntity<>(HttpStatus.CREATED);
+	public ResponseEntity<TicketDomain> post(@RequestBody TicketApplication ticket) {
+		System.out.print(ticket.getDisplacement());
+		return new ResponseEntity<>(service.registerIncome(ticket),HttpStatus.CREATED);
 	}
 	
 

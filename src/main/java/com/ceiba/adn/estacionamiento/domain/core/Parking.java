@@ -20,10 +20,13 @@ public class Parking {
 	public static final int MAXIMUM_CAPACITY_OF_CARS = 20; 
 	public static final String FULL_PARKING = "En este momento no hay espacios disponibles para este tipo de vehiculo";
 	
+	public Parking(ParkingRepository parkingRepository) {
+		this.parkingRepository = parkingRepository;
+	}
 	
 	public TicketDomain registerIncome(TicketDomain ticket) {
-		//aca van las logicas y excepciones
-		return null;
+		// aca van las logicas y excepciones 
+		return parkingRepository.registerIncome(ticket);
 	}
 	
 	public TicketDomain registerExit() {

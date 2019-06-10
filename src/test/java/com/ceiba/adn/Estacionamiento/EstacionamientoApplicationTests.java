@@ -1,4 +1,4 @@
-package com.ceiba.adn.Estacionamiento;
+package com.ceiba.adn.estacionamiento;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
