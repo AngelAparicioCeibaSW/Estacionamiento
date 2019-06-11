@@ -2,7 +2,7 @@ package com.ceiba.adn.estacionamiento.domain.core;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
+import java.util.List;
 import com.ceiba.adn.estacionamiento.domain.repository.ParkingRepository;
 
 @Component
@@ -25,8 +25,11 @@ public class Parking {
 	}
 	
 	public TicketDomain registerIncome(TicketDomain ticket) {
-		// aca van las logicas y excepciones 
 		return parkingRepository.registerIncome(ticket);
+	}
+	
+	public List<TicketDomain> findActiveTickets(){
+		return parkingRepository.findActiveTickets();
 	}
 	
 	public TicketDomain registerExit() {

@@ -1,5 +1,8 @@
 package com.ceiba.adn.estacionamiento.infraestructure.persist.repositories.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +25,14 @@ public class ParkingRepositoryImpl implements ParkingRepository{
 		TicketEntity entity = mapper.toEntity(ticket);
 		jpa.save(entity);
 		return mapper.toDomain(entity);
+	}
+
+	@Override
+	public List<TicketDomain> findActiveTickets() {
+		List<TicketDomain> tickets = new ArrayList<>();
+		jpa.activeTickets().forEach(entity -> 
+		tickets.add(mapper.toDomain(entity)));
+		return tickets;
 	}
 
 	

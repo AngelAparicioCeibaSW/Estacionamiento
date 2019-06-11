@@ -9,6 +9,8 @@ import com.ceiba.adn.estacionamiento.application.domain.TicketApplication;
 import com.ceiba.adn.estacionamiento.domain.core.Parking;
 import com.ceiba.adn.estacionamiento.domain.core.TicketDomain;
 
+import java.util.List;
+
 
 
 
@@ -33,6 +35,10 @@ public class ParkingService {
 		domain.setStatus(true);
 		//aca van las primeras validaciones
 		return parking.registerIncome(domain);
+	}
+	
+	public List<TicketDomain> findActiveTickets(){
+		return parking.findActiveTickets();
 	}
 
 }
