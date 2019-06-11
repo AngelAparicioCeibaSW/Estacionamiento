@@ -1,4 +1,4 @@
-package com.ceiba.adn.estacionamiento.domain.services;
+package com.ceiba.adn.estacionamiento.application.services;
 
 import java.util.Calendar;
 

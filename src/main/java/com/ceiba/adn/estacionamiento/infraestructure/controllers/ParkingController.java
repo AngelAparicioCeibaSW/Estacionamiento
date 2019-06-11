@@ -17,8 +17,8 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 import com.ceiba.adn.estacionamiento.application.domain.*;
+import com.ceiba.adn.estacionamiento.application.services.ParkingService;
 import com.ceiba.adn.estacionamiento.domain.core.TicketDomain;
-import com.ceiba.adn.estacionamiento.domain.services.ParkingService;
 
 @RestController
 @RequestMapping("/api/ticket")
