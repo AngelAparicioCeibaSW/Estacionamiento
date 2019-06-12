@@ -1,7 +1,7 @@
 package com.ceiba.adn.estacionamiento.domain.services;
 
 import com.ceiba.adn.estacionamiento.domain.entity.Ticket;
-import com.ceiba.adn.estacionamiento.domain.exception.ParkingException;
+import com.ceiba.adn.estacionamiento.domain.exception.VehicleInParkingException;
 import com.ceiba.adn.estacionamiento.domain.repository.ParkingRepository;
 
 public class CreateTicketService {
@@ -31,7 +31,7 @@ public class CreateTicketService {
 	private void validateRegister(String licensePlate) {
 		boolean existe = this.parkingRepository.validateExits(licensePlate);
     	if(existe) {
-    		throw new ParkingException(VEHICLE_IN_PARKING);
+    		throw new VehicleInParkingException(VEHICLE_IN_PARKING);
     	}
 	}
 

@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 import com.ceiba.adn.estacionamiento.domain.entity.ArgumentValidator;
 import com.ceiba.adn.estacionamiento.domain.entity.Ticket;
-import com.ceiba.adn.estacionamiento.domain.exception.ParkingException;
+import com.ceiba.adn.estacionamiento.domain.exception.VehicleInParkingException;
 import com.ceiba.adn.estacionamiento.domain.repository.ParkingRepository;
 
 @Component
@@ -30,7 +30,7 @@ public class UpdateTicketService {
 	private Ticket validateRegister(String licensePlate) {
 		Ticket ticket = this.parkingRepository.returnExits(licensePlate);
     	if(ticket == null) {
-    		throw new ParkingException(VEHICLE_NOT_IN_PARKING);
+    		throw new VehicleInParkingException(VEHICLE_NOT_IN_PARKING);
     	}
     	return ticket;
 	}

@@ -1,10 +1,10 @@
 package com.ceiba.adn.estacionamiento.domain.exception;
 
-public class ParkingException extends RuntimeException {
+public class VehicleInParkingException extends RuntimeException {
 	
 	private static final long serialVersionUID = 1L;
 
-	public ParkingException(String msg) {
+	public VehicleInParkingException(String msg) {
 		super(msg);
 	}
 
