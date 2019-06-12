@@ -1,5 +1,6 @@
 package com.ceiba.adn.estacionamiento.infraestructure.persist.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -15,10 +16,13 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "ticket")
-public class TicketEntity {
+public class TicketEntity implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", nullable = false)
 	private Long id;
 	
 	@Column(name = "license_plate", nullable = false)
@@ -39,7 +43,7 @@ public class TicketEntity {
 	private boolean status;
 	
 	@Column(name = "displacement", nullable = true)
-	private int displacement;
+	private String displacement;
 	
 	@Column(name = "type_vehicle", nullable = true)
 	private String typeVehicle;

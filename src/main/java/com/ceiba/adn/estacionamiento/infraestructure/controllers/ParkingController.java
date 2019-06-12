@@ -3,52 +3,64 @@ package com.ceiba.adn.estacionamiento.infraestructure.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ceiba.adn.estacionamiento.application.command.CreateTicketCommandHandler;
+import com.ceiba.adn.estacionamiento.application.command.TicketCommand;
+import com.ceiba.adn.estacionamiento.application.command.UpdateTicketCommandHandler;
+import com.ceiba.adn.estacionamiento.application.common.CommandResponse;
+import com.ceiba.adn.estacionamiento.application.query.FindActiveTicketsQueryHandler;
+import com.ceiba.adn.estacionamiento.domain.entity.Ticket;
+import com.ceiba.adn.estacionamiento.domain.entity.TicketActive;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 
-import com.ceiba.adn.estacionamiento.application.domain.*;
-import com.ceiba.adn.estacionamiento.application.services.ParkingService;
-import com.ceiba.adn.estacionamiento.domain.core.TicketDomain;
 
 @RestController
 @RequestMapping("/api/ticket")
-@Api(tags = "ticket")
+@Api(tags = { "Controller tickets"})
 public class ParkingController {
 	
+	private final CreateTicketCommandHandler createTicketCommandHandler;
+	private final UpdateTicketCommandHandler updateTicketCommandHandler;
+	private final FindActiveTicketsQueryHandler findActiveTicketsQueryHandler;
+	
 	@Autowired
-	private ParkingService service;
+	public ParkingController(CreateTicketCommandHandler createTicketCommandHandler,
+			UpdateTicketCommandHandler updateTicketCommandHandler,
+			FindActiveTicketsQueryHandler findActiveTicketsQueryHandler) {
+		this.createTicketCommandHandler = createTicketCommandHandler;
+		this.updateTicketCommandHandler = updateTicketCommandHandler;
+		this.findActiveTicketsQueryHandler = findActiveTicketsQueryHandler;
+	}
+	
+	@PostMapping
+	@ApiOperation("Save Ticket")
+	public CommandResponse<Ticket> post(@RequestBody TicketCommand command) {
+		return createTicketCommandHandler.exec(command);
+	}
+	
 
-	public ParkingService getService() {
-		return service;
+	@GetMapping
+	@ApiOperation("Active Tickets")
+	public List<TicketActive> listar() {
+		return this.findActiveTicketsQueryHandler.exec();
 	}
 	
-	@PostMapping("/saveTicket")
-	@ApiOperation(value = "Registrar ticket", notes = "Registra un nuevo ticket")
-	@ApiResponses(value = { @ApiResponse(code = 201, message = "Ticket registrado correctamente"),
-			@ApiResponse(code = 404, message = "no fue posible registrar el ticket") })
-	public ResponseEntity<TicketDomain> post(@RequestBody TicketApplication ticket) {
-		return new ResponseEntity<>(service.registerIncome(ticket),HttpStatus.CREATED);
+	@PutMapping(value="/{licensePlate}")
+	@ApiOperation("Actualizar Usuario")
+	public CommandResponse<Float> actualizar(@PathVariable String licensePlate) {
+		return this.updateTicketCommandHandler.exec(licensePlate);
 	}
 	
-	@GetMapping("/activeTickets")
-	@ApiOperation(value = "Listar tickets activos", notes = "Lista todos los tickets que no tienen fecha de salida ni precio, o sea, "
-			+ "tickets de vehículos que aún estan en el parqueadero")
-	@ApiResponses(value = { @ApiResponse(code = 201, message = "Tickets activos listados correctamente"),
-			@ApiResponse(code = 204, message = "No hay tickets activos") })
-	public ResponseEntity<List<TicketDomain>> getActiveTickets() {
-		List<TicketDomain> tickets = service.findActiveTickets();
-		return new ResponseEntity<>(tickets, HttpStatus.OK);
-	}
+
 	
 
 }

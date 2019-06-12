@@ -1,6 +1,6 @@
 package com.ceiba.adn.estacionamiento.infraestructure.persist.mapper;
 
-import com.ceiba.adn.estacionamiento.domain.core.TicketDomain;
+import com.ceiba.adn.estacionamiento.domain.entity.Ticket;
 import com.ceiba.adn.estacionamiento.infraestructure.persist.entities.TicketEntity;
 
 public class TicketMapper {
@@ -13,8 +13,8 @@ public class TicketMapper {
 	public static TicketMapper getInstance() {
 		return INSTANCE;
 	}
-	public TicketDomain toDomain(TicketEntity entity) {
-		TicketDomain domain = new TicketDomain();
+	public Ticket toDomain(TicketEntity entity) {
+		Ticket domain = new Ticket();
 		domain.setDisplacement(entity.getDisplacement());
 		domain.setEntry(entity.getEntry());
 		domain.setExit(entity.getExit());
@@ -26,7 +26,7 @@ public class TicketMapper {
 		return domain;
 	}
 	
-	public TicketEntity toEntity(TicketDomain domain) {
+	public TicketEntity toEntity(Ticket domain) {
 		TicketEntity entity = new TicketEntity();
 		entity.setDisplacement(domain.getDisplacement());
 		entity.setEntry(domain.getEntry());
