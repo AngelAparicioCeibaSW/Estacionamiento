@@ -45,6 +45,20 @@ public interface ParkingRepository {
 	 */
 	public Ticket returnExits(String licensePlate);
 	
+	/**
+	 * Método que retorna la cantidad de vehiculos de tipo carro que se encuentran simultaneamente en el estacionamiento
+	 * 
+	 * @return cantidad de vehiculos de tipo carro
+	 */
+	public long countActiveCars();
+	
+	/**
+	 * Método que retorna la cantidad de vehiculos de tipo moto que se encuentran simultaneamente en el estacionamiento
+	 * 
+	 * @return cantidad de vehiculos de tipo moto
+	 */
+	public long countActiveMotorcycles();
+	
 	
 	
 	

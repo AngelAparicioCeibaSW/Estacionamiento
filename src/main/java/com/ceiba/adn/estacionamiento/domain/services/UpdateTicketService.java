@@ -13,6 +13,12 @@ public class UpdateTicketService {
 	private ParkingRepository parkingRepository;
 	private static final String VEHICLE_NOT_IN_PARKING = "Este vehiculo no se encuentra en el parqueadero";
 	private static final String PLEASE_ENTER_LICENSEPLATE = "Se debe ingresar la placa para poder registrar la salida de un vehiculo";
+	private static final float PRICE_CAR_HOUR = 1000;
+	private static final float PRICE_CAR_DAY = 8000;
+	private static final float PRICE_MOTORCYCLE_HOUR = 500;
+	private static final float PRICE_MOTORCYCLE_DAY = 4000;
+	private static final float PRICE_MOTORCYCLE_EXTRA = 2000;
+	
 	
 	public UpdateTicketService(ParkingRepository parkingRepository) {
 		this.parkingRepository = parkingRepository;

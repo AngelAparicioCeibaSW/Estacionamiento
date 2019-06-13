@@ -1,6 +1,7 @@
 package com.ceiba.adn.estacionamiento.domain.entity;
 
-import com.ceiba.adn.estacionamiento.domain.exception.VehicleInParkingException;
+import com.ceiba.adn.estacionamiento.domain.exception.ArgumentException;
+import com.ceiba.adn.estacionamiento.domain.exception.InvalidVehicleTypeException;
 
 public final class ArgumentValidator {
 	
@@ -13,19 +14,19 @@ public final class ArgumentValidator {
 	
 	public static void validateRequired(Object value,String message) {
 		if(value == null || value.equals(IS_EMPTY)) {
-			throw new VehicleInParkingException(message);
+			throw new ArgumentException(message);
 		}
 	}
 	
 	public static void validateDateRequired(Object value,String message) {
 		if(value == null) {
-			throw new VehicleInParkingException(message);
+			throw new ArgumentException(message);
 		}
 	}
 	
 	public static void validateTypeVehicle(Object value,String message) {
 		if(!value.equals(MOTO) && !value.equals(CARRO)) {
-			throw new VehicleInParkingException(message);
+			throw new InvalidVehicleTypeException(message);
 		}
 	}
 }

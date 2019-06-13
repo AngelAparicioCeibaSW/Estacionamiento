@@ -16,7 +16,7 @@ import com.ceiba.adn.estacionamiento.infraestructure.persist.repositories.jpa.Pa
 public class ParkingRepositoryImpl implements ParkingRepository {
 
 	private static final TicketMapper mapper = TicketMapper.getInstance();
-
+	
 	@Autowired
 	private ParkingRepositoryJPA jpa;
 
@@ -47,7 +47,16 @@ public class ParkingRepositoryImpl implements ParkingRepository {
 	public Ticket returnExits(String licensePlate) {
 		TicketEntity entity = jpa.findByLicensePlate(licensePlate);
 		return mapper.toDomain(entity);
+	}
 
+	@Override
+	public long countActiveCars() {
+		return jpa.countActiveCars();
+	}
+
+	@Override
+	public long countActiveMotorcycles() {
+		return jpa.countActiveMotorcycles();
 	}
 
 }

@@ -31,6 +31,7 @@ public class ParkingControllerTest {
 	private WebApplicationContext wac;
 
 	private MockMvc mvc;
+	private static final String URL_TICKETS = "/api/ticket/";
 
 	@Before
 	public void setUp() {
@@ -39,12 +40,12 @@ public class ParkingControllerTest {
 
 	@Test
 	public void getActiveTickets() throws Exception {
-		this.mvc.perform(get("/api/ticket/").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+		this.mvc.perform(get(URL_TICKETS).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
 	}
 
 	@Test
 	public void registerIncometCarro() throws Exception {
-		mvc.perform(post("/api/ticket/").content("{\r\n" + 
+		mvc.perform(post(URL_TICKETS).content("{\r\n" + 
 				"	\"licensePlate\" : \"URG-585\",\r\n" + 
 				"	\"displacement\" : \"\",\r\n" + 
 				"	\"typeVehicle\" : \"CARRO\"\r\n" + 
@@ -54,7 +55,7 @@ public class ParkingControllerTest {
 	
 	@Test
 	public void registerIncomeMoto() throws Exception {
-		mvc.perform(post("/api/ticket/").content("{\r\n" + 
+		mvc.perform(post(URL_TICKETS).content("{\r\n" + 
 				"	\"licensePlate\" : \"URG-586\",\r\n" + 
 				"	\"displacement\" : \"500\",\r\n" + 
 				"	\"typeVehicle\" : \"MOTO\"\r\n" + 
@@ -64,7 +65,7 @@ public class ParkingControllerTest {
 	
 	@Test
 	public void registerExit() throws Exception {
-		mvc.perform(patch("/api/ticket/" + "URG-585")
+		mvc.perform(patch(URL_TICKETS + "URG-585")
 				.contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
 	}
 	
