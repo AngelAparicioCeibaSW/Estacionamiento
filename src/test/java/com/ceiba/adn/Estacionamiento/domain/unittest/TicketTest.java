@@ -26,6 +26,7 @@ public class TicketTest {
 		this.ticketBuilder = new TicketTestDatabuilder().whitTypeVehicle(TYPE_VEHICLE_MOTO).whitDisplacement(DISPLACEMENT_MOTO);
 		// act
 		this.ticket = this.ticketBuilder.build();
+		//assert
 		assertNotNull(ticket);
 	}
 	
@@ -39,6 +40,7 @@ public class TicketTest {
 		this.ticketBuilder = new TicketTestDatabuilder().whitTypeVehicle(TYPE_VEHICLE_CARRO).whitDisplacement(DISPLACEMENT_CARRO);
 		// act
 		this.ticket = this.ticketBuilder.build();
+		//assert
 		assertNotNull(ticket);
 	}
 

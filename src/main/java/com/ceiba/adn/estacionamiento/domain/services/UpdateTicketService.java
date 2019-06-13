@@ -23,6 +23,7 @@ public class UpdateTicketService {
 		Ticket ticket = validateRegister(licensePlate);
 		Float price = new Float(20000.10);
 		ticket.setPrice(price);
+		ticket.setStatus(false);
 		this.parkingRepository.registerExit(ticket);
 		return ticket.getPrice();
 	}
