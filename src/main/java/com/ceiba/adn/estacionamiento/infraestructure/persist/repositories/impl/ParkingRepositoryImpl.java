@@ -1,6 +1,5 @@
 package com.ceiba.adn.estacionamiento.infraestructure.persist.repositories.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ import com.ceiba.adn.estacionamiento.infraestructure.persist.repositories.jpa.Pa
 @Component
 public class ParkingRepositoryImpl implements ParkingRepository {
 
-	private TicketMapper mapper = TicketMapper.getInstance();
+	private static final TicketMapper mapper = TicketMapper.getInstance();
 
 	@Autowired
 	private ParkingRepositoryJPA jpa;
@@ -30,8 +29,7 @@ public class ParkingRepositoryImpl implements ParkingRepository {
 
 	@Override
 	public List<TicketActive> findActiveTickets() {
-		List<TicketActive> tickets = jpa.activeTickets();
-		return tickets;
+		return jpa.activeTickets();
 	}
 
 	@Override
@@ -43,14 +41,14 @@ public class ParkingRepositoryImpl implements ParkingRepository {
 	@Override
 	public boolean validateExits(String licensePlate) {
 		TicketEntity entity = jpa.findByLicensePlate(licensePlate);
-		return entity !=null;
+		return entity != null;
 	}
 
 	@Override
 	public Ticket returnExits(String licensePlate) {
 		TicketEntity entity = jpa.findByLicensePlate(licensePlate);
-		Ticket ticket = mapper.toDomain(entity);
-		return ticket;
+		return mapper.toDomain(entity);
+
 	}
 
 }
