@@ -23,8 +23,7 @@ public class ParkingRepositoryImpl implements ParkingRepository {
 	@Override
 	public Ticket registerIncome(Ticket ticket) {
 		TicketEntity entity = mapper.toEntity(ticket);
-		jpa.save(entity);
-		return mapper.toDomain(entity);
+		return mapper.toDomain(jpa.save(entity));
 	}
 
 	@Override
@@ -35,7 +34,7 @@ public class ParkingRepositoryImpl implements ParkingRepository {
 	@Override
 	public boolean registerExit(Ticket ticket) {
 		TicketEntity entity = mapper.toEntity(ticket);
-		return entity == null;
+		return jpa.save(entity) != null;
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package com.ceiba.adn.estacionamiento.domain.integrationtest;
+package com.ceiba.adn.estacionamiento.infraestructure.integrationTest;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

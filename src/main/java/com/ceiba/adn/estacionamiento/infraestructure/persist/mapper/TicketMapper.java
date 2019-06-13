@@ -3,7 +3,7 @@ package com.ceiba.adn.estacionamiento.infraestructure.persist.mapper;
 import com.ceiba.adn.estacionamiento.domain.entity.Ticket;
 import com.ceiba.adn.estacionamiento.infraestructure.persist.entities.TicketEntity;
 
-public class TicketMapper {
+public final class TicketMapper {
 	
 	private TicketMapper() {
 	}

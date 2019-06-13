@@ -1,12 +1,12 @@
-package com.ceiba.adn.estacionamiento.domain.testDataBuilder;
+package com.ceiba.adn.estacionamiento.infraestructure.testDataBuilder;
 
 import java.util.Calendar;
 import java.util.Date;
 
-import com.ceiba.adn.estacionamiento.domain.entity.Ticket;
+import com.ceiba.adn.estacionamiento.infraestructure.persist.entities.TicketEntity;
 
-public class TicketTestDatabuilder {
-
+public class TicketEntityDataBuilder {
+	
 	private Long id;
 	private String licensePlate;
 	private Date entry;
@@ -16,7 +16,7 @@ public class TicketTestDatabuilder {
 	private String displacement;
 	private String typeVehicle;
 
-	public TicketTestDatabuilder() {
+	public TicketEntityDataBuilder() {
 		this.id = (long) 10;
 		this.licensePlate = "URG-585";
 		this.entry = Calendar.getInstance().getTime();
@@ -25,48 +25,48 @@ public class TicketTestDatabuilder {
 		this.typeVehicle = "MOTO";
 	}
 
-	public TicketTestDatabuilder whitId(long id) {
+	public TicketEntityDataBuilder whitId(long id) {
 		this.id = id;
 		return this;
 	}
 
-	public TicketTestDatabuilder whitLicensePlate(String licensePlate) {
+	public TicketEntityDataBuilder whitLicensePlate(String licensePlate) {
 		this.licensePlate = licensePlate;
 		return this;
 	}
 
-	public TicketTestDatabuilder whitEntry(Date entry) {
+	public TicketEntityDataBuilder whitEntry(Date entry) {
 		this.entry = entry;
 		return this;
 	}
 
-	public TicketTestDatabuilder whitExit(Date exit) {
+	public TicketEntityDataBuilder whitExit(Date exit) {
 		this.exit = exit;
 		return this;
 	}
 
-	public TicketTestDatabuilder whitPrice(float price) {
+	public TicketEntityDataBuilder whitPrice(float price) {
 		this.price = price;
 		return this;
 	}
 
-	public TicketTestDatabuilder whitStatus(boolean status) {
+	public TicketEntityDataBuilder whitStatus(boolean status) {
 		this.status = status;
 		return this;
 	}
 
-	public TicketTestDatabuilder whitDisplacement(String displacement) {
+	public TicketEntityDataBuilder whitDisplacement(String displacement) {
 		this.displacement = displacement;
 		return this;
 	}
 
-	public TicketTestDatabuilder whitTypeVehicle(String typeVehicle) {
+	public TicketEntityDataBuilder whitTypeVehicle(String typeVehicle) {
 		this.typeVehicle = typeVehicle;
 		return this;
 	}
 
-	public Ticket build() {
-		Ticket ticket = new Ticket();
+	public TicketEntity build() {
+		TicketEntity ticket = new TicketEntity();
 		ticket.setId(this.id);
 		ticket.setDisplacement(this.displacement);
 		ticket.setEntry(this.entry);
@@ -77,4 +77,5 @@ public class TicketTestDatabuilder {
 		ticket.setTypeVehicle(this.typeVehicle);
 		return ticket;
 	}
+
 }
