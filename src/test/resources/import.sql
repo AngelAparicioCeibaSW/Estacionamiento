@@ -1,0 +1,1 @@
+insert into ticket (id, displacement, entry,  license_plate, price, status, type_vehicle) values (0, '200', CURRENT_TIMESTAMP, 'URG-585',0.0, true, 'MOTO')

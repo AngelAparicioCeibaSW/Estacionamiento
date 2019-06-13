@@ -1,6 +1,7 @@
 package com.ceiba.adn.estacionamiento.infraestructure.integrationTest;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -38,11 +39,11 @@ public class ParkingControllerTest {
 
 	@Test
 	public void getActiveTickets() throws Exception {
-		this.mvc.perform(get("/api/ticket/")).andExpect(status().isOk());
+		this.mvc.perform(get("/api/ticket/").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
 	}
 
 	@Test
-	public void createATicketCarro() throws Exception {
+	public void registerIncometCarro() throws Exception {
 		mvc.perform(post("/api/ticket/").content("{\r\n" + 
 				"	\"licensePlate\" : \"URG-585\",\r\n" + 
 				"	\"displacement\" : \"\",\r\n" + 
@@ -52,13 +53,19 @@ public class ParkingControllerTest {
 	}
 	
 	@Test
-	public void createATicketMoto() throws Exception {
+	public void registerIncomeMoto() throws Exception {
 		mvc.perform(post("/api/ticket/").content("{\r\n" + 
 				"	\"licensePlate\" : \"URG-586\",\r\n" + 
 				"	\"displacement\" : \"500\",\r\n" + 
 				"	\"typeVehicle\" : \"MOTO\"\r\n" + 
 				" }").contentType(MediaType.APPLICATION_JSON)
 				).andExpect(status().isOk());
+	}
+	
+	@Test
+	public void registerExit() throws Exception {
+		mvc.perform(patch("/api/ticket/" + "URG-585")
+				.contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
 	}
 	
 

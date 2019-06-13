@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,13 +50,13 @@ public class ParkingController {
 
 	@GetMapping
 	@ApiOperation("Active Tickets")
-	public List<TicketActive> listar() {
+	public List<TicketActive> get() {
 		return this.findActiveTicketsQueryHandler.exec();
 	}
 	
-	@PutMapping(value="/{licensePlate}")
-	@ApiOperation("Actualizar Usuario")
-	public CommandResponse<Float> actualizar(@PathVariable String licensePlate) {
+	@PatchMapping(value="/{licensePlate}")
+	@ApiOperation("Update Ticket")
+	public CommandResponse<Float> put(@PathVariable String licensePlate) {
 		return this.updateTicketCommandHandler.exec(licensePlate);
 	}
 	

@@ -2,6 +2,9 @@ package com.ceiba.adn.estacionamiento.domain.unitTest;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import org.junit.Test;
 
 import com.ceiba.adn.estacionamiento.domain.entity.Ticket;
@@ -15,7 +18,11 @@ public class TicketTest {
 	private static final String DISPLACEMENT_MOTO = "500";
 	private static final String TYPE_VEHICLE_CARRO = "CARRO";
 	private static final String DISPLACEMENT_CARRO = "500";
-
+	private static final boolean REGISTER_SUCCESS = true;
+	private static final Date ENTRY = Calendar.getInstance().getTime();
+	private static final String LICENSEPLATE_MOTO ="URG-243";
+	private static final String LICENSEPLATE_CARRO ="URG-585";
+	
 	/**
 	 * 
 	 * Test el cual verifica que el ticket se creo correctamente para una moto
@@ -23,7 +30,7 @@ public class TicketTest {
 	@Test
 	public void createTicketMoto() {
 		// arrange
-		this.ticketBuilder = new TicketTestDatabuilder().whitTypeVehicle(TYPE_VEHICLE_MOTO).whitDisplacement(DISPLACEMENT_MOTO);
+		this.ticketBuilder = new TicketTestDatabuilder().whitLicensePlate(LICENSEPLATE_MOTO).whitTypeVehicle(TYPE_VEHICLE_MOTO).whitDisplacement(DISPLACEMENT_MOTO).whitStatus(REGISTER_SUCCESS).whitEntry(ENTRY);
 		// act
 		this.ticket = this.ticketBuilder.build();
 		//assert
@@ -37,7 +44,7 @@ public class TicketTest {
 	@Test
 	public void createTicketCarro() {
 		// arrange
-		this.ticketBuilder = new TicketTestDatabuilder().whitTypeVehicle(TYPE_VEHICLE_CARRO).whitDisplacement(DISPLACEMENT_CARRO);
+		this.ticketBuilder = new TicketTestDatabuilder().whitLicensePlate(LICENSEPLATE_CARRO).whitTypeVehicle(TYPE_VEHICLE_CARRO).whitDisplacement(DISPLACEMENT_CARRO).whitStatus(REGISTER_SUCCESS);
 		// act
 		this.ticket = this.ticketBuilder.build();
 		//assert
