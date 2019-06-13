@@ -1,6 +1,7 @@
 package com.ceiba.adn.estacionamiento.infraestructure.integrationTest;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Before;
@@ -9,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -19,7 +21,7 @@ import com.ceiba.adn.estacionamiento.ApplicationMock;
 import com.ceiba.adn.estacionamiento.EstacionamientoApplication;
 
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes=ApplicationMock.class)
+@ContextConfiguration(classes = ApplicationMock.class)
 @SpringBootTest(classes = EstacionamientoApplication.class)
 @AutoConfigureMockMvc
 public class ParkingControllerTest {
@@ -38,4 +40,26 @@ public class ParkingControllerTest {
 	public void getActiveTickets() throws Exception {
 		this.mvc.perform(get("/api/ticket/")).andExpect(status().isOk());
 	}
+
+	@Test
+	public void createATicketCarro() throws Exception {
+		mvc.perform(post("/api/ticket/").content("{\r\n" + 
+				"	\"licensePlate\" : \"URG-585\",\r\n" + 
+				"	\"displacement\" : \"\",\r\n" + 
+				"	\"typeVehicle\" : \"CARRO\"\r\n" + 
+				" }").contentType(MediaType.APPLICATION_JSON)
+				).andExpect(status().isOk());
+	}
+	
+	@Test
+	public void createATicketMoto() throws Exception {
+		mvc.perform(post("/api/ticket/").content("{\r\n" + 
+				"	\"licensePlate\" : \"URG-586\",\r\n" + 
+				"	\"displacement\" : \"500\",\r\n" + 
+				"	\"typeVehicle\" : \"MOTO\"\r\n" + 
+				" }").contentType(MediaType.APPLICATION_JSON)
+				).andExpect(status().isOk());
+	}
+	
+
 }
