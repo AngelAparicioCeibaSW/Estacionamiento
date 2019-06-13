@@ -38,17 +38,13 @@ public class ParkingRepositoryImpl implements ParkingRepository {
 	@Override
 	public boolean registerExit(Ticket ticket) {
 		TicketEntity entity = mapper.toEntity(ticket);
-		boolean response = true;
-		entity = jpa.save(entity);
-		if(entity == null) {
-			response=false;
-		}
-		return response;
+		return entity == null;
 	}
 
 	@Override
 	public boolean validateExits(String licensePlate) {
-		return false;
+		TicketEntity entity = jpa.findByLicensePlate(licensePlate);
+		return entity !=null;
 	}
 
 	@Override
