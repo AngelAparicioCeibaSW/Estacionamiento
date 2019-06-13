@@ -30,8 +30,7 @@ public class ParkingRepositoryImpl implements ParkingRepository {
 
 	@Override
 	public List<TicketActive> findActiveTickets() {
-		List<TicketActive> tickets = new ArrayList<>();
-		tickets = jpa.activeTickets();
+		List<TicketActive> tickets = jpa.activeTickets();
 		return tickets;
 	}
 
