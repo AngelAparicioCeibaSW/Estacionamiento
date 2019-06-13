@@ -36,6 +36,6 @@ public class ParkingControllerTest {
 
 	@Test
 	public void getActiveTickets() throws Exception {
-		this.mvc.perform(get("/api/ticket/activeTickets")).andExpect(status().isOk());
+		this.mvc.perform(get("/api/ticket/")).andExpect(status().isOk());
 	}
 }

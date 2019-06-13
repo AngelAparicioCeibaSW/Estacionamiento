@@ -13,16 +13,16 @@ public class TicketTestDatabuilder {
 	private Date exit;
 	private float price;
 	private boolean status;
-	private int displacement;
+	private String displacement;
 	private String typeVehicle;
-	
+
 	public TicketTestDatabuilder() {
-		this.id = (long) 10 ;
+		this.id = (long) 10;
 		this.licensePlate = "URG-585";
 		this.entry = Calendar.getInstance().getTime();
 		this.status = false;
-		this.displacement = 300;
-		this.typeVehicle ="MOTO";
+		this.displacement = "300";
+		this.typeVehicle = "MOTO";
 	}
 
 	public TicketTestDatabuilder whitId(long id) {
@@ -55,17 +55,26 @@ public class TicketTestDatabuilder {
 		return this;
 	}
 
-	public TicketTestDatabuilder whitDisplacement(int displacement) {
+	public TicketTestDatabuilder whitDisplacement(String displacement) {
 		this.displacement = displacement;
 		return this;
 	}
 
-	public TicketTestDatabuilder whitLicenseTypeVehicle(String typeVehicle) {
+	public TicketTestDatabuilder whitTypeVehicle(String typeVehicle) {
 		this.typeVehicle = typeVehicle;
 		return this;
 	}
 
-	//public Ticket build() {
-	//	return new Ticket(id, licensePlate, entry, exit, price, status, displacement, typeVehicle);
-	//}
+	public Ticket build() {
+		Ticket ticket = new Ticket();
+		ticket.setId(this.id);
+		ticket.setDisplacement(this.displacement);
+		ticket.setEntry(this.entry);
+		ticket.setExit(this.exit);
+		ticket.setLicensePlate(this.licensePlate);
+		ticket.setPrice(this.price);
+		ticket.setStatus(this.status);
+		ticket.setTypeVehicle(this.typeVehicle);
+		return ticket;
+	}
 }
