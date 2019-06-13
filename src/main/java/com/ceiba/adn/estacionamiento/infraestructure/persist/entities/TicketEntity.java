@@ -3,17 +3,22 @@ package com.ceiba.adn.estacionamiento.infraestructure.persist.entities;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.TemporalType;
-import javax.persistence.Column;
-import lombok.Data;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
-@Data
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "ticket")
 public class TicketEntity implements Serializable{
