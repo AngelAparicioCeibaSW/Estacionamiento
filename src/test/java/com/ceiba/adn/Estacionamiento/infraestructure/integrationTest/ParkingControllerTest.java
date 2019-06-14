@@ -1,8 +1,8 @@
 package com.ceiba.adn.estacionamiento.infraestructure.integrationTest;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Before;
@@ -65,7 +65,7 @@ public class ParkingControllerTest {
 	
 	@Test
 	public void registerExit() throws Exception {
-		mvc.perform(patch(URL_TICKETS + "URG-585")
+		mvc.perform(put(URL_TICKETS).content("URG-585")
 				.contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
 	}
 	

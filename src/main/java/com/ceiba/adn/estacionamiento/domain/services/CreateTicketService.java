@@ -1,6 +1,7 @@
 package com.ceiba.adn.estacionamiento.domain.services;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import com.ceiba.adn.estacionamiento.domain.entity.Ticket;
 import com.ceiba.adn.estacionamiento.domain.exception.FullParkingException;
@@ -28,7 +29,7 @@ public class CreateTicketService {
 	public Ticket registerIncome(Ticket ticket) {
 		validateRegister(ticket.getLicensePlate());
 		validateFullParking(ticket.getTypeVehicle());
-		validateEntryOfVehycles(ticket.getLicensePlate());
+		validateEntryOfVehycles(ticket.getLicensePlate(),ticket.getEntry());
 		return this.parkingRepository.registerIncome(ticket);
 	}
 
@@ -49,8 +50,9 @@ public class CreateTicketService {
 		}
 	}
 
-	private void validateEntryOfVehycles(String licensePlate) {
+	private void validateEntryOfVehycles(String licensePlate,Date date) {
 		Calendar today = Calendar.getInstance();
+		today.setTimeInMillis(date.getTime());
 		int day = today.get(Calendar.DAY_OF_WEEK);
 		if (licensePlate.startsWith(FIRST_LETTER_LICENSEPLATE) && (day > Calendar.MONDAY)) {
 			throw new IncomeNotAllowedException(INCOME_NOT_ALLOWED);

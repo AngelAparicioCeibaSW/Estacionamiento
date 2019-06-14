@@ -17,7 +17,7 @@ public class TicketTest {
 	private static final String TYPE_VEHICLE_MOTO = "MOTO";
 	private static final String DISPLACEMENT_MOTO = "500";
 	private static final String TYPE_VEHICLE_CARRO = "CARRO";
-	private static final String DISPLACEMENT_CARRO = "500";
+	private static final String DISPLACEMENT_CARRO = "";
 	private static final boolean REGISTERED_SUCCESS = true;
 	private static final Date ENTRY = Calendar.getInstance().getTime();
 	private static final String LICENSEPLATE_MOTO = "URG-243";

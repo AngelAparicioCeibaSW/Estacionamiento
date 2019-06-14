@@ -1,6 +1,5 @@
 package com.ceiba.adn.estacionamiento.domain.testDataBuilder;
 
-import java.util.Calendar;
 import java.util.Date;
 
 import com.ceiba.adn.estacionamiento.domain.entity.Ticket;
@@ -17,12 +16,6 @@ public class TicketTestDatabuilder {
 	private String typeVehicle;
 
 	public TicketTestDatabuilder() {
-		this.id = (long) 10;
-		this.licensePlate = "URG-585";
-		this.entry = Calendar.getInstance().getTime();
-		this.status = false;
-		this.displacement = "300";
-		this.typeVehicle = "MOTO";
 	}
 
 	public TicketTestDatabuilder whitId(long id) {
