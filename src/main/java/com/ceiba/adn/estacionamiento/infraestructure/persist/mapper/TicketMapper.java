@@ -4,20 +4,23 @@ import com.ceiba.adn.estacionamiento.domain.entity.Ticket;
 import com.ceiba.adn.estacionamiento.infraestructure.persist.entities.TicketEntity;
 
 public final class TicketMapper {
-	
+
 	private TicketMapper() {
 	}
-	
+
 	private static final TicketMapper INSTANCE = new TicketMapper();
-	
+
 	public static TicketMapper getInstance() {
 		return INSTANCE;
 	}
+
 	public Ticket toDomain(TicketEntity entity) {
 		Ticket domain = new Ticket();
 		domain.setDisplacement(entity.getDisplacement());
 		domain.setEntry(entity.getEntry());
-		domain.setExit(entity.getExit());
+		if(entity.getExit() != null) {
+			domain.setExit(entity.getExit());
+		}
 		domain.setId(entity.getId());
 		domain.setLicensePlate(entity.getLicensePlate());
 		domain.setPrice(entity.getPrice());
@@ -25,7 +28,7 @@ public final class TicketMapper {
 		domain.setTypeVehicle(entity.getTypeVehicle());
 		return domain;
 	}
-	
+
 	public TicketEntity toEntity(Ticket domain) {
 		TicketEntity entity = new TicketEntity();
 		entity.setDisplacement(domain.getDisplacement());

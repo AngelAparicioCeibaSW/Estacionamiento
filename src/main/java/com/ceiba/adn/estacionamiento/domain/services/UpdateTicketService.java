@@ -1,5 +1,8 @@
 package com.ceiba.adn.estacionamiento.domain.services;
 
+import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
+
 import org.springframework.stereotype.Component;
 
 import com.ceiba.adn.estacionamiento.domain.entity.ArgumentValidator;
@@ -18,6 +21,8 @@ public class UpdateTicketService {
 	private static final float PRICE_MOTORCYCLE_HOUR = 500;
 	private static final float PRICE_MOTORCYCLE_DAY = 4000;
 	private static final float PRICE_MOTORCYCLE_EXTRA = 2000;
+	private static final String MOTO = "MOTO";
+	private static final String CARRO = "CARRO";
 
 	public UpdateTicketService(ParkingRepository parkingRepository) {
 		this.parkingRepository = parkingRepository;
@@ -26,9 +31,9 @@ public class UpdateTicketService {
 	public float registerExit(String licensePlate) {
 		ArgumentValidator.validateRequired(licensePlate, LICENSEPLATE_IS_EMPTY);
 		Ticket ticket = validateRegister(licensePlate);
-		Float price = new Float(20000.10);
-		ticket.setPrice(price);
 		ticket.setStatus(false);
+		ticket.setExit(Calendar.getInstance().getTime());
+		ticket.setPrice(calculatePrice(ticket));
 		this.parkingRepository.registerExit(ticket);
 		return ticket.getPrice();
 	}
@@ -39,6 +44,25 @@ public class UpdateTicketService {
 			throw new VehicleInParkingException(VEHICLE_NOT_IN_PARKING);
 		}
 		return ticket;
+	}
+
+	private float calculatePrice(Ticket ticket) {
+		float price = 0;
+		long serviceTime = ticket.getExit().getTime() - ticket.getEntry().getTime();
+		serviceTime = TimeUnit.MILLISECONDS.toHours(serviceTime);
+		long dias = (serviceTime / 24);
+		long horasSobrantes = (serviceTime % 24);
+		if (ticket.getTypeVehicle().equalsIgnoreCase(MOTO)) {
+			price += dias * PRICE_MOTORCYCLE_DAY;
+			price += horasSobrantes * PRICE_MOTORCYCLE_HOUR;
+			if (Integer.parseInt(ticket.getDisplacement()) > 500) {
+				price += PRICE_MOTORCYCLE_EXTRA;
+			}
+		} else if (ticket.getTypeVehicle().equalsIgnoreCase(CARRO)) {
+			price += dias * PRICE_CAR_DAY;
+			price += horasSobrantes * PRICE_CAR_HOUR;
+		}
+		return price;
 	}
 
 }

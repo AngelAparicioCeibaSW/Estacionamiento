@@ -44,30 +44,35 @@ public class ParkingControllerTest {
 	}
 
 	@Test
-	public void registerIncometCarro() throws Exception {
-		mvc.perform(post(URL_TICKETS).content("{\r\n" + 
-				"	\"licensePlate\" : \"URG-585\",\r\n" + 
-				"	\"displacement\" : \"\",\r\n" + 
-				"	\"typeVehicle\" : \"CARRO\"\r\n" + 
-				" }").contentType(MediaType.APPLICATION_JSON)
-				).andExpect(status().isOk());
+	public void registerIncometCar() throws Exception {
+		mvc.perform(
+				post(URL_TICKETS)
+						.content("{\r\n" + "	\"licensePlate\" : \"URG-588\",\r\n"
+								+ "	\"displacement\" : \"\",\r\n" + "	\"typeVehicle\" : \"CARRO\"\r\n" + " }")
+						.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk());
 	}
-	
+
 	@Test
-	public void registerIncomeMoto() throws Exception {
-		mvc.perform(post(URL_TICKETS).content("{\r\n" + 
-				"	\"licensePlate\" : \"URG-586\",\r\n" + 
-				"	\"displacement\" : \"500\",\r\n" + 
-				"	\"typeVehicle\" : \"MOTO\"\r\n" + 
-				" }").contentType(MediaType.APPLICATION_JSON)
-				).andExpect(status().isOk());
+	public void registerIncomeMotorcycle() throws Exception {
+		mvc.perform(
+				post(URL_TICKETS)
+						.content("{\r\n" + "	\"licensePlate\" : \"URG-589\",\r\n"
+								+ "	\"displacement\" : \"500\",\r\n" + "	\"typeVehicle\" : \"MOTO\"\r\n" + " }")
+						.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk());
 	}
-	
+
 	@Test
-	public void registerExit() throws Exception {
-		mvc.perform(put(URL_TICKETS).content("URG-585")
+	public void registerExitMotorcycle() throws Exception {
+		mvc.perform(put(URL_TICKETS).content("{\r\n" + "	\"licensePlate\" : \"URG-585\" \r\n" + " }")
 				.contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
 	}
 	
+	@Test
+	public void registerExitCar() throws Exception {
+		mvc.perform(put(URL_TICKETS).content("{\r\n" + "	\"licensePlate\" : \"URG-586\" \r\n" + " }")
+				.contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+	}
 
 }

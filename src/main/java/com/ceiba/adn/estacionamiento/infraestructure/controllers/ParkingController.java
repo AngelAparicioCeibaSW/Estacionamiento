@@ -55,8 +55,8 @@ public class ParkingController {
 	
 	@PutMapping()
 	@ApiOperation("Update Ticket")
-	public CommandResponse<Float> put(@RequestBody String licensePlate) {
-		return this.updateTicketCommandHandler.exec(licensePlate);
+	public CommandResponse<Float> put(@RequestBody TicketCommand command) {
+		return this.updateTicketCommandHandler.exec(command.getLicensePlate());
 	}
 	
 

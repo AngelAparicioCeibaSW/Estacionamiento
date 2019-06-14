@@ -108,6 +108,16 @@ public class CreateTicketServiceTest {
 	}
 
 	@Test
+	public void validateNotExits() {
+		// arrange
+		this.ticketBuilder = new TicketTestDatabuilder().whitLicensePlate(LICENSEPLATE).whitTypeVehicle(CARRO)
+				.whitEntry(today);
+		this.ticket = this.ticketBuilder.build();
+		when(this.parking.validateExits(LICENSEPLATE)).thenReturn(true);
+		assertEquals(this.parking.validateExits(LICENSEPLATE), true);
+	}
+
+	@Test
 	public void vehicleNotInParking() {
 		// arrange
 		this.ticketBuilder = new TicketTestDatabuilder().whitLicensePlate(LICENSEPLATE).whitTypeVehicle(CARRO)
@@ -163,7 +173,7 @@ public class CreateTicketServiceTest {
 	public void validateEntryOfVehycles() {
 		// arrange
 		Calendar ahoraCal = Calendar.getInstance();
-		ahoraCal.set(2019,5,26);
+		ahoraCal.set(2019, 5, 26);
 		Date todayModify = ahoraCal.getTime();
 		this.ticketBuilder = new TicketTestDatabuilder().whitDisplacement(DISPLACEMENT)
 				.whitLicensePlate(LICENSEPLATE_INCOME_NOT_ALLOWED).whitEntry(todayModify).whitTypeVehicle(MOTO);
@@ -177,7 +187,7 @@ public class CreateTicketServiceTest {
 			// assert
 			assertEquals(e.getMessage(), INCOME_NOT_ALLOWED);
 		}
-				
+
 	}
 
 }
