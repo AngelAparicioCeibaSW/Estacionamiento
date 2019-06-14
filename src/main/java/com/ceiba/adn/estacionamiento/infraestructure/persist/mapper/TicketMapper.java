@@ -18,9 +18,7 @@ public final class TicketMapper {
 		Ticket domain = new Ticket();
 		domain.setDisplacement(entity.getDisplacement());
 		domain.setEntry(entity.getEntry());
-		if(entity.getExit() != null) {
-			domain.setExit(entity.getExit());
-		}
+		domain.setExit(entity.getExit());
 		domain.setId(entity.getId());
 		domain.setLicensePlate(entity.getLicensePlate());
 		domain.setPrice(entity.getPrice());

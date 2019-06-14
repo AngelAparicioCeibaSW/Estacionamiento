@@ -26,16 +26,15 @@ public class UpdateTicketServiceTest {
 	private UpdateTicketService service;
 	private TicketTestDatabuilder ticketBuilder;
 	private Ticket ticket;
-	private Date today;
 	private static final String MOTO = "MOTO";
-	private static final String CARRO = "CARRO";
-	
+	private static final String DISPLACEMENT = "300";
+	private static final int DIAS_PRUEBA = 1;
+	private static final int HORAS_PRUEBA = 3;
 	
 	@Before
 	public void setUp() {
 		// arrange
 		this.parking = mock(ParkingRepository.class);
-		this.today = Calendar.getInstance().getTime();
 	}
 	
 	@Test
@@ -60,6 +59,24 @@ public class UpdateTicketServiceTest {
 			// assert
 			assertEquals(e.getMessage(),VEHICLE_NOT_IN_PARKING);
 		}
+	}
+	
+	
+	@Test
+	public void calculatePriceMotorcycle() {
+		// arrange
+		Calendar ahoraCal = Calendar.getInstance();
+		ahoraCal.set(ahoraCal.get(Calendar.YEAR), ahoraCal.get(Calendar.MONTH), ahoraCal.get(Calendar.DATE)-DIAS_PRUEBA,ahoraCal.get(Calendar.HOUR),0);
+		Date entry = ahoraCal.getTime();
+		this.ticketBuilder = new TicketTestDatabuilder().whitDisplacement(DISPLACEMENT).whitLicensePlate(LICENSEPLATE)
+				.whitTypeVehicle(MOTO).whitEntry(entry);
+		this.ticket = this.ticketBuilder.build();
+		when(this.parking.returnExits(LICENSEPLATE)).thenReturn(this.ticket);
+		this.service = new 	UpdateTicketService(this.parking);
+		// act
+		Float price = this.service.registerExit(LICENSEPLATE);
+		// assert
+		assertEquals(6000, price, 0);
 	}
 	
 	

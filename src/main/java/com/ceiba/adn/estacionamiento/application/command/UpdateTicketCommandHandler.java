@@ -7,20 +7,17 @@ import com.ceiba.adn.estacionamiento.application.common.commandhandleresponse.Co
 import com.ceiba.adn.estacionamiento.domain.services.UpdateTicketService;
 
 @Component
-public class UpdateTicketCommandHandler implements CommandHandleResponse<String, CommandResponse<Float>>{
+public class UpdateTicketCommandHandler implements CommandHandleResponse<String, CommandResponse<Float>> {
 
 	private final UpdateTicketService updateTicketService;
-
 
 	public UpdateTicketCommandHandler(UpdateTicketService updateTicketService) {
 		this.updateTicketService = updateTicketService;
 	}
-	
+
 	@Override
 	public CommandResponse<Float> exec(String licensePlate) {
 		return new CommandResponse<>(updateTicketService.registerExit(licensePlate));
 	}
-	
 
-	
 }
