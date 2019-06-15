@@ -63,16 +63,16 @@ public class ParkingControllerTest {
 				.andExpect(status().isOk());
 	}
 
-	/*
-	 * @Test public void registerExitMotorcycle() throws Exception {
-	 * mvc.perform(put(URL_TICKETS).content("{\r\n" +
-	 * "	\"licensePlate\" : \"URG-585\" \r\n" + " }")
-	 * .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk()); }
-	 * 
-	 * @Test public void registerExitCar() throws Exception {
-	 * mvc.perform(put(URL_TICKETS).content("{\r\n" +
-	 * "	\"licensePlate\" : \"URG-586\" \r\n" + " }")
-	 * .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk()); }
-	 */
+	@Test
+	public void registerExitMotorcycle() throws Exception {
+		mvc.perform(put(URL_TICKETS).content("{\r\n" + "	\"licensePlate\" : \"URG-585\" \r\n" + " }")
+				.contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+	}
+
+	@Test
+	public void registerExitCar() throws Exception {
+		mvc.perform(put(URL_TICKETS).content("{\r\n" + "	\"licensePlate\" : \"URG-586\" \r\n" + " }")
+				.contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+	}
 
 }

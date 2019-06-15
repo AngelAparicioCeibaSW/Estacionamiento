@@ -49,19 +49,21 @@ public class UpdateTicketService {
 	private float calculatePrice(Ticket ticket) {
 		float price = 0;
 		long serviceTime = ticket.getExit().getTime() - ticket.getEntry().getTime();
-		System.out.println(ticket.getExit());
-		System.out.println(ticket.getEntry());
 		serviceTime = TimeUnit.MILLISECONDS.toHours(serviceTime);
 		long dias = (serviceTime / 24);
 		long horasSobrantes = (serviceTime-(dias*24));
-		System.out.println(dias+"-"+horasSobrantes);
+		if(horasSobrantes>=9) {
+			dias ++;
+			horasSobrantes=0;
+		}
 		if (ticket.getTypeVehicle().equalsIgnoreCase(MOTO)) {
 			price += dias * PRICE_MOTORCYCLE_DAY;
 			price += horasSobrantes * PRICE_MOTORCYCLE_HOUR;
 			if (Integer.parseInt(ticket.getDisplacement()) > 500) {
 				price += PRICE_MOTORCYCLE_EXTRA;
 			}
-		} else if (ticket.getTypeVehicle().equalsIgnoreCase(CARRO)) {
+		}
+		if (ticket.getTypeVehicle().equalsIgnoreCase(CARRO)) {
 			price += dias * PRICE_CAR_DAY;
 			price += horasSobrantes * PRICE_CAR_HOUR;
 		}

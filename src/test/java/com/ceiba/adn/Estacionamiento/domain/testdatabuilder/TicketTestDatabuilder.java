@@ -18,11 +18,6 @@ public class TicketTestDatabuilder {
 	public TicketTestDatabuilder() {
 	}
 
-	public TicketTestDatabuilder whitId(long id) {
-		this.id = id;
-		return this;
-	}
-
 	public TicketTestDatabuilder whitLicensePlate(String licensePlate) {
 		this.licensePlate = licensePlate;
 		return this;
@@ -30,11 +25,6 @@ public class TicketTestDatabuilder {
 
 	public TicketTestDatabuilder whitEntry(Date entry) {
 		this.entry = entry;
-		return this;
-	}
-
-	public TicketTestDatabuilder whitExit(Date exit) {
-		this.exit = exit;
 		return this;
 	}
 
