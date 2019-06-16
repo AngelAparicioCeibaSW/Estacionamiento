@@ -31,7 +31,7 @@ public class UpdateTicketServiceTest {
 	private static final String DISPLACEMENT_EXTRA = "600";
 	private static final String DISPLACEMENT = "300";
 	private static final int DAYS_TEST_CAR = 1;
-	private static final int HOURS_TEST_CAR = 3;
+	private static final int HOURS_TEST_CAR = 2;
 	private static final int DAYS_TEST_MOTORCYCLE = 0;
 	private static final int HOURS_TEST_MOTORCYCLE = 10;
 	private static final float PRICE_TEST_MOTORCYCLE = 4000;

@@ -49,9 +49,13 @@ public class UpdateTicketService {
 	private float calculatePrice(Ticket ticket) {
 		float price = 0;
 		long serviceTime = ticket.getExit().getTime() - ticket.getEntry().getTime();
+		long minutos = TimeUnit.MILLISECONDS.toMinutes(serviceTime);
 		serviceTime = TimeUnit.MILLISECONDS.toHours(serviceTime);
 		long dias = (serviceTime / 24);
 		long horasSobrantes = (serviceTime-(dias*24));
+		if(minutos%60 >0) {
+			horasSobrantes++;
+		}
 		if(horasSobrantes>=9) {
 			dias ++;
 			horasSobrantes=0;

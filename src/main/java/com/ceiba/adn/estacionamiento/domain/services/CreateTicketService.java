@@ -58,5 +58,4 @@ public class CreateTicketService {
 			throw new IncomeNotAllowedException(INCOME_NOT_ALLOWED);
 		}
 	}
-
 }
