@@ -13,7 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.ceiba.adn.estacionamiento.domain.entity.Ticket;
-import com.ceiba.adn.estacionamiento.domain.exception.VehicleInParkingException;
+import com.ceiba.adn.estacionamiento.domain.exception.VehicleNotInParkingException;
 import com.ceiba.adn.estacionamiento.domain.repository.ParkingRepository;
 import com.ceiba.adn.estacionamiento.domain.services.UpdateTicketService;
 import com.ceiba.adn.estacionamiento.domain.testDataBuilder.TicketTestDatabuilder;
@@ -62,7 +62,7 @@ public class UpdateTicketServiceTest {
 			// act
 			this.service.registerExit(LICENSEPLATE);
 			fail();
-		} catch (VehicleInParkingException e) {
+		} catch (VehicleNotInParkingException e) {
 			// assert
 			assertEquals(e.getMessage(), VEHICLE_NOT_IN_PARKING);
 		}

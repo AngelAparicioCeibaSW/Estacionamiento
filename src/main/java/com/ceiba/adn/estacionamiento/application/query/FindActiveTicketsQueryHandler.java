@@ -2,6 +2,7 @@ package com.ceiba.adn.estacionamiento.application.query;
 
 import java.util.List;
 import org.springframework.stereotype.Component;
+
 import com.ceiba.adn.estacionamiento.domain.entity.TicketActive;
 import com.ceiba.adn.estacionamiento.domain.services.FindActiveTicketsService;
 

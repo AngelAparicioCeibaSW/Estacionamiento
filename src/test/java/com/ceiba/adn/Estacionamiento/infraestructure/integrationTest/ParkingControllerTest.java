@@ -61,6 +61,7 @@ public class ParkingControllerTest {
 		TicketCommandDataBuilder ticketBuilder = new TicketCommandDataBuilder().whitLicensePlate(licenseplate_Car).whitTypeVehicle(CARRO);
 		TicketCommand ticket = ticketBuilder.build();
 		JSONObject jsonTicketComman = new JSONObject(ticket);
+		
 		mvc.perform(post(URL_TICKETS).content(jsonTicketComman.toString()).contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
 	}
@@ -83,6 +84,7 @@ public class ParkingControllerTest {
 		JSONObject responseCommand = new JSONObject(responseExit);
 		mvc.perform(put(URL_TICKETS).content(jsonTicketComman.toString()).contentType(MediaType.APPLICATION_JSON))
 		.andExpect(status().isOk()).andExpect((content().json(responseCommand.toString())));
+		
 	}
 
 	@Test
