@@ -60,6 +60,9 @@ public class UpdateTicketService {
 			dias ++;
 			horasSobrantes=0;
 		}
+		if(horasSobrantes==0 && dias==0) {
+			horasSobrantes=1;
+		}
 		if (ticket.getTypeVehicle().equalsIgnoreCase(MOTO)) {
 			price += dias * PRICE_MOTORCYCLE_DAY;
 			price += horasSobrantes * PRICE_MOTORCYCLE_HOUR;
