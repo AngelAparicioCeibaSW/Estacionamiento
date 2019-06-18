@@ -20,7 +20,7 @@ import com.ceiba.adn.estacionamiento.domain.exception.VehicleNotInParkingExcepti
 @ControllerAdvice
 public class ErrorHandler extends ResponseEntityExceptionHandler {
 
-	private static final Logger logguer = LoggerFactory.getLogger(ErrorHandler.class);
+	private static final Logger logger = LoggerFactory.getLogger(ErrorHandler.class);
 
 	private static final String MESSAGE_ALL_ERROR = "Ocurrió un error favor contactar al administrador.";
 
@@ -45,7 +45,7 @@ public class ErrorHandler extends ResponseEntityExceptionHandler {
 		Integer code = ERRORS.get(exceptionName);
 
 		if (code == null) {
-			logguer.error(exceptionName, message);
+			logger.error(exceptionName, message);
 			Error error = new Error(exceptionName, MESSAGE_ALL_ERROR);
 			response = new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
 		} else {
