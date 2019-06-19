@@ -106,6 +106,23 @@ public class CreateTicketServiceTest {
 			assertEquals(e.getMessage(), VEHICLE_IN_PARKING);
 		}
 	}
+	
+	@Test
+	public void vehicleNotParking() {
+		// arrange
+		this.ticketBuilder = new TicketTestDatabuilder().whitLicensePlate(LICENSEPLATE).whitTypeVehicle(CARRO)
+				.whitEntry(today);
+		this.ticket = this.ticketBuilder.build();
+		when(this.parking.validateExits(LICENSEPLATE)).thenReturn(false);
+		this.service = new CreateTicketService(this.parking);
+		try {
+			// act
+			this.service.registerIncome(this.ticket);
+		} catch (VehicleInParkingException e) {
+			// assert
+			fail();
+		}
+	}
 
 	@Test
 	public void validateNotExits() {
