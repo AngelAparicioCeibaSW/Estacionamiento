@@ -24,6 +24,7 @@ import com.ceiba.adn.estacionamiento.ApplicationMock;
 import com.ceiba.adn.estacionamiento.EstacionamientoApplication;
 import com.ceiba.adn.estacionamiento.application.command.TicketCommand;
 import com.ceiba.adn.estacionamiento.application.common.CommandResponse;
+import com.ceiba.adn.estacionamiento.infraestructure.error.Error;
 import com.ceiba.adn.estacionamiento.infraestructure.integration.testDatabuilder.TicketCommandDataBuilder;
 
 @RunWith(SpringRunner.class)
@@ -39,13 +40,13 @@ public class ParkingControllerTest {
 	private static final String URL_TICKETS = "/api/ticket/";
 	private static final String LICENSEPLATE_CAR = "URG-586";
 	private static final String LICENSEPLATE_MOTORCYCLE = "URG-589";
-	// private static final String LICENSEPLATE_FAIL = "URG-58p";
+	private static final String LICENSEPLATE_FAIL = "URG-58p";
 	private static final String MOTO = "MOTO";
 	private static final String CARRO = "CARRO";
 	private static final String DISPLACEMENT = "400";
-	private static final float  PRICE_CAR= 1000;
-	private static final float  PRICE_MOTORCYCLE= 500;
-	
+	private static final float PRICE_CAR = 1000;
+	private static final float PRICE_MOTORCYCLE = 500;
+	private static final String MESSAGE_ALL_ERROR = "Ocurrió un error favor contactar al administrador.";
 
 	@Before
 	public void setUp() {
@@ -60,18 +61,20 @@ public class ParkingControllerTest {
 
 	@Test
 	public void registerIncometCar() throws Exception {
-		TicketCommandDataBuilder ticketBuilder = new TicketCommandDataBuilder().whitLicensePlate(LICENSEPLATE_CAR).whitTypeVehicle(CARRO);
+		TicketCommandDataBuilder ticketBuilder = new TicketCommandDataBuilder().whitLicensePlate(LICENSEPLATE_CAR)
+				.whitTypeVehicle(CARRO);
 		TicketCommand ticket = ticketBuilder.build();
 		JSONObject jsonTicketComman = new JSONObject(ticket);
 		CommandResponse<TicketCommand> commandResponse = new CommandResponse<>(ticket);
 		JSONObject jsonTicketCommanResponse = new JSONObject(commandResponse);
 		mvc.perform(post(URL_TICKETS).content(jsonTicketComman.toString()).contentType(MediaType.APPLICATION_JSON))
-		.andExpect(status().isOk()).andExpect(content().json(jsonTicketCommanResponse.toString()));
+				.andExpect(status().isOk()).andExpect(content().json(jsonTicketCommanResponse.toString()));
 	}
-	
+
 	@Test
 	public void registerIncomeMotorcycle() throws Exception {
-		TicketCommandDataBuilder ticketBuilder = new TicketCommandDataBuilder().whitLicensePlate(LICENSEPLATE_MOTORCYCLE).whitTypeVehicle(MOTO).whitDisplacement(DISPLACEMENT);
+		TicketCommandDataBuilder ticketBuilder = new TicketCommandDataBuilder()
+				.whitLicensePlate(LICENSEPLATE_MOTORCYCLE).whitTypeVehicle(MOTO).whitDisplacement(DISPLACEMENT);
 		TicketCommand ticket = ticketBuilder.build();
 		JSONObject jsonTicketComman = new JSONObject(ticket);
 		CommandResponse<TicketCommand> commandResponse = new CommandResponse<>(ticket);
@@ -82,14 +85,15 @@ public class ParkingControllerTest {
 
 	@Test
 	public void registerExitMotorcycle() throws Exception {
-		TicketCommandDataBuilder ticketBuilder = new TicketCommandDataBuilder().whitLicensePlate(LICENSEPLATE_MOTORCYCLE);
+		TicketCommandDataBuilder ticketBuilder = new TicketCommandDataBuilder()
+				.whitLicensePlate(LICENSEPLATE_MOTORCYCLE);
 		TicketCommand ticket = ticketBuilder.build();
 		JSONObject jsonTicketComman = new JSONObject(ticket);
 		CommandResponse<Float> responseExit = new CommandResponse<>(PRICE_MOTORCYCLE);
 		JSONObject responseCommand = new JSONObject(responseExit);
 		mvc.perform(put(URL_TICKETS).content(jsonTicketComman.toString()).contentType(MediaType.APPLICATION_JSON))
-		.andExpect(status().isOk()).andExpect((content().json(responseCommand.toString())));
-		
+				.andExpect(status().isOk()).andExpect((content().json(responseCommand.toString())));
+
 	}
 
 	@Test
@@ -102,5 +106,17 @@ public class ParkingControllerTest {
 		mvc.perform(put(URL_TICKETS).content(jsonTicketComman.toString()).contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk()).andExpect((content().json(responseCommand.toString())));
 	}
-	
+
+	@Test
+	public void registerExitCarFail() throws Exception {
+		TicketCommandDataBuilder ticketBuilder = new TicketCommandDataBuilder().whitLicensePlate(LICENSEPLATE_FAIL);
+		TicketCommand ticket = ticketBuilder.build();
+		JSONObject jsonTicketComman = new JSONObject(ticket);
+		String exceptionName = NullPointerException.class.getSimpleName();
+		Error error = new Error(exceptionName, MESSAGE_ALL_ERROR);
+		JSONObject errorJsonResponse = new JSONObject(error);
+		mvc.perform(put(URL_TICKETS).content(jsonTicketComman.toString()).contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().is5xxServerError()).andExpect((content().json(errorJsonResponse.toString())));
+	}
+
 }
