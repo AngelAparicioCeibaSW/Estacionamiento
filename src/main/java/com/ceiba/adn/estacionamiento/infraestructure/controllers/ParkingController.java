@@ -1,9 +1,7 @@
 package com.ceiba.adn.estacionamiento.infraestructure.controllers;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -22,7 +20,6 @@ import com.ceiba.adn.estacionamiento.domain.entity.TicketActive;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
 @RequestMapping("/api/ticket")
 @Api(tags = { "Controller tickets"})
@@ -60,7 +57,4 @@ public class ParkingController {
 		return this.updateTicketCommandHandler.exec(command.getLicensePlate());
 	}
 	
-
-	
-
 }
