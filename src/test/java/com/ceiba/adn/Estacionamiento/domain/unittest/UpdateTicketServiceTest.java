@@ -37,7 +37,7 @@ public class UpdateTicketServiceTest {
 	private static final float PRICE_TEST_MOTORCYCLE = 4000;
 	private static final float PRICE_TEST_MOTORCYCLE_EXTRA = 6000;
 	private static final float PRICE_TEST_CAR = 11000;
-	
+
 	@Before
 	public void setUp() {
 		// arrange
@@ -65,6 +65,18 @@ public class UpdateTicketServiceTest {
 		} catch (VehicleNotInParkingException e) {
 			// assert
 			assertEquals(e.getMessage(), VEHICLE_NOT_IN_PARKING);
+		}
+	}
+
+	@Test
+	public void vehicleInParking() {
+		// arrange
+		when(this.parking.validateExits(LICENSEPLATE)).thenReturn(true);
+		this.service = new UpdateTicketService(this.parking);
+		try {
+			// act
+			this.service.registerExit(LICENSEPLATE);
+		} catch (VehicleNotInParkingException e) {
 		}
 	}
 
@@ -132,6 +144,5 @@ public class UpdateTicketServiceTest {
 		assertEquals(PRICE_TEST_CAR, price, 0);
 		assertEquals(true, exit);
 	}
-	
 
 }
