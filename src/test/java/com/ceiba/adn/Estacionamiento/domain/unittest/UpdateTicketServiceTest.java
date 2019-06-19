@@ -144,5 +144,18 @@ public class UpdateTicketServiceTest {
 		assertEquals(PRICE_TEST_CAR, price, 0);
 		assertEquals(true, exit);
 	}
+	
+
+	@Test
+	public void registerNotExitCar() {
+		// arrange
+		when(this.parking.returnExits(LICENSEPLATE)).thenReturn(null);
+		when(this.parking.registerExit(this.ticket)).thenReturn(false);
+		this.service = new UpdateTicketService(this.parking);
+		// act
+		boolean exit = this.parking.registerExit(this.ticket);
+		// assert
+		assertEquals(false, exit);
+	}
 
 }
