@@ -38,7 +38,6 @@ public class ErrorHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(Exception.class)
 	public final ResponseEntity<Error> handleAllExceptions(Exception exception) {
 		ResponseEntity<Error> response;
-
 		String exceptionName = exception.getClass().getSimpleName();
 		String message = exception.getMessage();
 

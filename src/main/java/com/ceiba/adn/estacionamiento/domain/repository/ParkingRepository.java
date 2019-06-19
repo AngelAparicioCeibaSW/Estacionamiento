@@ -1,8 +1,8 @@
 package com.ceiba.adn.estacionamiento.domain.repository;
 import java.util.List;
 
+import com.ceiba.adn.estacionamiento.application.query.TicketActiveQuery;
 import com.ceiba.adn.estacionamiento.domain.entity.Ticket;
-import com.ceiba.adn.estacionamiento.domain.entity.TicketActive;
 public interface ParkingRepository {
 	
 	/**
@@ -17,7 +17,7 @@ public interface ParkingRepository {
 	 * Método que lista todos los tickets que se encuentran activos en el parqueadero
 	 * @return tickets activos
 	 */
-	public List<TicketActive> findActiveTickets();
+	public List<TicketActiveQuery> findActiveTickets();
 	
 	
 	/**

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.ceiba.adn.estacionamiento.domain.entity.TicketActive;
+import com.ceiba.adn.estacionamiento.application.query.TicketActiveQuery;
 import com.ceiba.adn.estacionamiento.domain.repository.ParkingRepository;
 
 @Component
@@ -16,7 +16,7 @@ public class FindActiveTicketsService {
 		this.parkingRepository = parkingRepository;
 	}
 	
-	public List<TicketActive> findActiveTickets(){
+	public List<TicketActiveQuery> findActiveTickets(){
 		return this.parkingRepository.findActiveTickets();
 	}
 

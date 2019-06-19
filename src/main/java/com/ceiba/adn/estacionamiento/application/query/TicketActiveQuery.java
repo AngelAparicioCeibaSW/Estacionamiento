@@ -1,14 +1,14 @@
-package com.ceiba.adn.estacionamiento.domain.entity;
+package com.ceiba.adn.estacionamiento.application.query;
 
 import java.util.Date;
 
-public class TicketActive {
+public class TicketActiveQuery {
 	
 	private String licensePlate;
 	private String entry;
 	private String typeVehicle;
 	
-	public TicketActive(String licensePlate,Date entry,String typeVehicle) {
+	public TicketActiveQuery(String licensePlate,Date entry,String typeVehicle) {
 		this.entry=  String.format("%1$tY-%1$tm-%1$td %1$tH:%1$tM", entry);
 		this.licensePlate = licensePlate;
 		this.typeVehicle = typeVehicle;

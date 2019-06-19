@@ -62,18 +62,21 @@ public class ParkingControllerTest {
 		TicketCommandDataBuilder ticketBuilder = new TicketCommandDataBuilder().whitLicensePlate(LICENSEPLATE_CAR).whitTypeVehicle(CARRO);
 		TicketCommand ticket = ticketBuilder.build();
 		JSONObject jsonTicketComman = new JSONObject(ticket);
-		
+		CommandResponse<TicketCommand> commandResponse = new CommandResponse<>(ticket);
+		JSONObject jsonTicketCommanResponse = new JSONObject(commandResponse);
 		mvc.perform(post(URL_TICKETS).content(jsonTicketComman.toString()).contentType(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
+		.andExpect(status().isOk()).andExpect(content().json(jsonTicketCommanResponse.toString()));
 	}
-
+	
 	@Test
 	public void registerIncomeMotorcycle() throws Exception {
 		TicketCommandDataBuilder ticketBuilder = new TicketCommandDataBuilder().whitLicensePlate(LICENSEPLATE_MOTORCYCLE).whitTypeVehicle(MOTO).whitDisplacement(DISPLACEMENT);
 		TicketCommand ticket = ticketBuilder.build();
 		JSONObject jsonTicketComman = new JSONObject(ticket);
+		CommandResponse<TicketCommand> commandResponse = new CommandResponse<>(ticket);
+		JSONObject jsonTicketCommanResponse = new JSONObject(commandResponse);
 		mvc.perform(post(URL_TICKETS).content(jsonTicketComman.toString()).contentType(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
+				.andExpect(status().isOk()).andExpect(content().json(jsonTicketCommanResponse.toString()));
 	}
 
 	@Test

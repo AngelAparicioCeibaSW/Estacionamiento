@@ -1,6 +1,7 @@
 package com.ceiba.adn.estacionamiento.infraestructure.controllers;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,8 +15,7 @@ import com.ceiba.adn.estacionamiento.application.command.TicketCommand;
 import com.ceiba.adn.estacionamiento.application.command.UpdateTicketCommandHandler;
 import com.ceiba.adn.estacionamiento.application.common.CommandResponse;
 import com.ceiba.adn.estacionamiento.application.query.FindActiveTicketsQueryHandler;
-import com.ceiba.adn.estacionamiento.domain.entity.Ticket;
-import com.ceiba.adn.estacionamiento.domain.entity.TicketActive;
+import com.ceiba.adn.estacionamiento.application.query.TicketActiveQuery;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -40,14 +40,14 @@ public class ParkingController {
 	
 	@PostMapping
 	@ApiOperation("Save Ticket")
-	public CommandResponse<Ticket> post(@RequestBody TicketCommand command) {
+	public CommandResponse<TicketCommand> post(@RequestBody TicketCommand command) {
 		return createTicketCommandHandler.exec(command);
 	}
 	
 
 	@GetMapping
 	@ApiOperation("Active Tickets")
-	public List<TicketActive> get() {
+	public List<TicketActiveQuery> get() {
 		return this.findActiveTicketsQueryHandler.exec();
 	}
 	

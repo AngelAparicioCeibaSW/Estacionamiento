@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ceiba.adn.estacionamiento.application.query.TicketActiveQuery;
 import com.ceiba.adn.estacionamiento.domain.entity.Ticket;
-import com.ceiba.adn.estacionamiento.domain.entity.TicketActive;
 import com.ceiba.adn.estacionamiento.domain.repository.ParkingRepository;
 import com.ceiba.adn.estacionamiento.infraestructure.persist.entities.TicketEntity;
 import com.ceiba.adn.estacionamiento.infraestructure.persist.mapper.TicketMapper;
@@ -27,7 +27,7 @@ public class ParkingRepositoryImpl implements ParkingRepository {
 	}
 
 	@Override
-	public List<TicketActive> findActiveTickets() {
+	public List<TicketActiveQuery> findActiveTickets() {
 		return jpa.activeTickets();
 	}
 
