@@ -79,6 +79,7 @@ public class UpdateTicketServiceTest {
 		} catch (VehicleNotInParkingException e) {
 		}
 	}
+	
 
 	@Test
 	public void registerExitMotorcycleExtra() {

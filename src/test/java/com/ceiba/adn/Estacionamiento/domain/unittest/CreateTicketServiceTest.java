@@ -131,6 +131,15 @@ public class CreateTicketServiceTest {
 		when(this.parking.validateExits(LICENSEPLATE)).thenReturn(true);
 		assertEquals(this.parking.validateExits(LICENSEPLATE), true);
 	}
+	
+	@Test
+	public void validateExits() {
+		// arrange
+		this.ticketBuilder = new TicketTestDatabuilder().whitLicensePlate(LICENSEPLATE).whitTypeVehicle(CARRO);
+		this.ticket = this.ticketBuilder.build();
+		when(this.parking.validateExits(LICENSEPLATE)).thenReturn(false);
+		assertEquals(this.parking.validateExits(LICENSEPLATE), false);
+	}
 
 
 
