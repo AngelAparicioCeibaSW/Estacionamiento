@@ -57,6 +57,7 @@ public class UpdateTicketServiceTest {
 	public void vehicleNotInParking() {
 		// arrange
 		when(this.parking.validateExits(LICENSEPLATE)).thenReturn(false);
+		when(this.parking.registerExit(this.ticket)).thenReturn(false);
 		this.service = new UpdateTicketService(this.parking);
 		try {
 			// act
@@ -147,16 +148,5 @@ public class UpdateTicketServiceTest {
 	}
 	
 
-	@Test
-	public void registerNotExitCar() {
-		// arrange
-		when(this.parking.returnExits(LICENSEPLATE)).thenReturn(null);
-		when(this.parking.registerExit(this.ticket)).thenReturn(false);
-		this.service = new UpdateTicketService(this.parking);
-		// act
-		boolean exit = this.parking.registerExit(this.ticket);
-		// assert
-		assertEquals(false, exit);
-	}
 
 }

@@ -39,6 +39,7 @@ public class ParkingControllerTest {
 	private static final String URL_TICKETS = "/api/ticket/";
 	private static final String LICENSEPLATE_CAR = "URG-586";
 	private static final String LICENSEPLATE_MOTORCYCLE = "URG-589";
+	// private static final String LICENSEPLATE_FAIL = "URG-58p";
 	private static final String MOTO = "MOTO";
 	private static final String CARRO = "CARRO";
 	private static final String DISPLACEMENT = "400";
@@ -101,5 +102,5 @@ public class ParkingControllerTest {
 		mvc.perform(put(URL_TICKETS).content(jsonTicketComman.toString()).contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk()).andExpect((content().json(responseCommand.toString())));
 	}
-
+	
 }
