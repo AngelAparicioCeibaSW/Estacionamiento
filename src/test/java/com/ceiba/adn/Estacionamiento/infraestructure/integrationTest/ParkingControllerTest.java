@@ -24,6 +24,7 @@ import com.ceiba.adn.estacionamiento.ApplicationMock;
 import com.ceiba.adn.estacionamiento.EstacionamientoApplication;
 import com.ceiba.adn.estacionamiento.application.command.TicketCommand;
 import com.ceiba.adn.estacionamiento.application.common.CommandResponse;
+import com.ceiba.adn.estacionamiento.domain.exception.IncomeNotAllowedException;
 import com.ceiba.adn.estacionamiento.infraestructure.error.Error;
 import com.ceiba.adn.estacionamiento.infraestructure.integration.testDatabuilder.TicketCommandDataBuilder;
 
@@ -41,12 +42,14 @@ public class ParkingControllerTest {
 	private static final String LICENSEPLATE_CAR = "URG-586";
 	private static final String LICENSEPLATE_MOTORCYCLE = "URG-589";
 	private static final String LICENSEPLATE_FAIL = "URG-58p";
+	private static final String LICENSEPLATE_FAIL_INCOMING = "ARG-58p";
 	private static final String MOTO = "MOTO";
 	private static final String CARRO = "CARRO";
 	private static final String DISPLACEMENT = "400";
 	private static final float PRICE_CAR = 1000;
 	private static final float PRICE_MOTORCYCLE = 500;
 	private static final String MESSAGE_ALL_ERROR = "Ocurrió un error favor contactar al administrador.";
+	private static final String INCOME_NOT_ALLOWED = "No esta autorizado a ingresar un dia distinto a domingo o lunes";
 
 	@Before
 	public void setUp() {
@@ -108,7 +111,7 @@ public class ParkingControllerTest {
 	}
 
 	@Test
-	public void registerExitCarFail() throws Exception {
+	public void registerExitCarFailExcepcionAll() throws Exception {
 		TicketCommandDataBuilder ticketBuilder = new TicketCommandDataBuilder().whitLicensePlate(LICENSEPLATE_FAIL);
 		TicketCommand ticket = ticketBuilder.build();
 		JSONObject jsonTicketComman = new JSONObject(ticket);
@@ -117,6 +120,20 @@ public class ParkingControllerTest {
 		JSONObject errorJsonResponse = new JSONObject(error);
 		mvc.perform(put(URL_TICKETS).content(jsonTicketComman.toString()).contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().is5xxServerError()).andExpect((content().json(errorJsonResponse.toString())));
+	}
+	
+
+	@Test
+	public void registerExitCarFailExcepcion() throws Exception {
+		TicketCommandDataBuilder ticketBuilder = new TicketCommandDataBuilder()
+				.whitLicensePlate(LICENSEPLATE_FAIL_INCOMING).whitTypeVehicle(MOTO).whitDisplacement(DISPLACEMENT);
+		TicketCommand ticket = ticketBuilder.build();
+		JSONObject jsonTicketComman = new JSONObject(ticket);
+		String exceptionName = IncomeNotAllowedException.class.getSimpleName();
+		Error error = new Error(exceptionName, INCOME_NOT_ALLOWED);
+		JSONObject errorJsonResponse = new JSONObject(error);
+		mvc.perform(post(URL_TICKETS).content(jsonTicketComman.toString()).contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNotAcceptable()).andExpect(content().json(errorJsonResponse.toString()));
 	}
 
 }
